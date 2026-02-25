@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import PencilBox from "@/components/PencilBox";
 
 const HERO_IMG = "https://cdn.poehali.dev/projects/405427c1-b45a-42bb-b0a4-24919991d6a5/files/6056a985-b5c4-4074-ba21-76a24ac38c36.jpg";
 
@@ -62,7 +63,17 @@ const GUIDE_STEPS = [
   { step: "06", title: "Расти и поступай", desc: "Программа ведёт от уровня ИЗО 3 класса до поступления в художественное училище.", icon: "🎓" },
 ];
 
+const PENCIL_TO_SECTION: Record<string, string> = {
+  home: "home",
+  newspaper: "gallery",
+  kids: "lessons",
+  parents: "guide",
+  reference: "achievements",
+  workshop: "teacher",
+};
+
 export default function Index() {
+  const [launched, setLaunched] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [ageGroup, setAgeGroup] = useState<"kids" | "adult">("kids");
   const [chatInput, setChatInput] = useState("");
@@ -82,6 +93,17 @@ export default function Index() {
       }]);
     }, 600);
   };
+
+  if (!launched) {
+    return (
+      <PencilBox
+        onSelect={(id) => {
+          setActiveSection(PENCIL_TO_SECTION[id] || "home");
+          setLaunched(true);
+        }}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background font-rubik">
