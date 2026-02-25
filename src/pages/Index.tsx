@@ -70,6 +70,9 @@ const PENCIL_TO_SECTION: Record<string, string> = {
   parents: "guide",
   reference: "achievements",
   workshop: "teacher",
+  guide: "guide",
+  achievements: "achievements",
+  teacher: "teacher",
 };
 
 export default function Index() {
